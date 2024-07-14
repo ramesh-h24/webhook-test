@@ -11,6 +11,7 @@ pipeline {
                     def prAction = env.action ?: 'unknown'
                     def REMOTE_GIT_URL = env.GIT_URL
                     echo "Pull request action: ${prAction}"
+                    echo " Remote repo url: ${REMOTE_GIT_URL}"
                     
                     
                     if (prAction == 'opened' || prAction == 'reopened' || prAction == 'synchronize') {
