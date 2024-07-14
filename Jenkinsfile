@@ -12,7 +12,7 @@ pipeline {
                     
                     if (prAction == 'opened' || prAction == 'reopened' || prAction == 'synchronize') {
                         echo "Checking out main branch: ${MAIN_BRANCH}"
-                        checkout([$class: 'GitSCM', branches: [[name: "refs/heads/${MAIN_BRANCH}"]], userRemoteConfigs: [[url: '$GIT_URL']]])
+                        checkout([$class: 'GitSCM', branches: [[name: "refs/heads/${MAIN_BRANCH}"]], userRemoteConfigs: [[url: '${env.GIT_URL}']]])
                         
 
                         def conflictCheck = sh(script: 'git merge-base --is-ancestor HEAD origin/${env.CHANGE_BRANCH}', returnStatus: true)
