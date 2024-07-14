@@ -4,7 +4,8 @@ pipeline {
         stage('Handle Pull Request Action') {
             steps {
                 script {
-                    def prAction = $action ?: 'unknown'
+                    sh "env"
+                    def prAction = env.action ?: 'unknown'
                     
                     if (prAction == 'opened') {
                         echo "Pull request was opened"
@@ -16,7 +17,7 @@ pipeline {
                         echo "Pull request was closed"
                         // Perform actions specific to closed pull request
                     } else {
-                        echo "Unknown pull request action: ${prAction}"
+                        echo "Unknown pull request action: $action"
                         // Handle unknown action accordingly
                     }
                 }
