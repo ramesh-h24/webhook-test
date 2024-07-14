@@ -10,6 +10,9 @@ tpipeline {
             steps {
                 script {
                     echo 'pulling Pr from git...'
+
+
+
                 }
             }
         }
