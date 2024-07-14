@@ -1,40 +1,27 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout scm') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('PULL PR from GIt') {
+        stage('Handle Pull Request Action') {
             steps {
                 script {
-                    echo 'pulling Pr from git...'
+                    def prAction = params.action ?: 'unknown'
+                    
+                    if (prAction == 'opened') {
+                        echo "Pull request was opened"
+                        // Perform actions specific to opened pull request
+                    } else if (prAction == 'reopened') {
+                        echo "Pull request was reopened"
+                        // Perform actions specific to reopened pull request
+                    } else if (prAction == 'closed') {
+                        echo "Pull request was closed"
+                        // Perform actions specific to closed pull request
+                    } else {
+                        echo "Unknown pull request action: ${prAction}"
+                        // Handle unknown action accordingly
+                    }
                 }
             }
         }
-        stage('merging to Integration branch test') {
-            steps {
-                script {
-                    echo 'checking merge conflicts | if no conflicts it will merge to integration branch'
-                }
-            }
-        }
-        stage('GE testing ') {
-            steps {
-                script {
-                    echo 'testing and validating code'
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            echo 'Pipeline failed. Check the logs for details.'
-        }
+        // Add more stages as needed
     }
 }
