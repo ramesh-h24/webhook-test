@@ -9,9 +9,7 @@ tpipeline {
         stage('PULL PR from GIt') {
             steps {
                 script {
-                    echo 'pulling Pr from git...'
-
-
+                    echo 'pulling Pr from git'
 
                 }
             }
