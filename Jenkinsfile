@@ -4,7 +4,7 @@ pipeline {
         stage('Handle Pull Request Action') {
             steps {
                 script {
-                    def prAction = $action ?: 'unknown'
+                    def prAction = params.action ?: 'unknown'
                     
                     if (prAction == 'opened') {
                         echo "Pull request was opened"
