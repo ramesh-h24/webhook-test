@@ -6,7 +6,6 @@ pipeline {
     parameters {
         choice(name: 'TARGET_BRANCH', choices: ['main'], description: 'merging branch')
     }
-    
     stages {
         // stage('Handle Pull Request Action') {
         //     steps {
