@@ -32,7 +32,7 @@ pipeline {
                 }
             }
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: "${params.TARGET_BRANCH}"]], userRemoteConfigs: [[url: '${REMOTE_GIT_URL}']])
+                checkout scmGit(branches: [[name: '*/master'], [name: ':^(?!origin/patch$|origin/feaure$).*']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_hub', url: 'https://github.com/ramesh-h24/webhook-test.git']])
             }
         }
         stage('Check Merge Conflicts') {
