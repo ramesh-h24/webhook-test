@@ -1,24 +1,20 @@
 pipeline {
     agent any
     stages {
+        stages {
         stage('Handle Pull Request Action') {
             steps {
                 script {
                     sh "env"
                     def prAction = env.action ?: 'unknown'
+                    def REMOTE_GIT_URL = env.GIT_URL
+                    echo "Pull request action: ${prAction}"
+                    echo " Remote repo url: ${REMOTE_GIT_URL}"
                     
-                    if (prAction == 'opened') {
-                        echo "Pull request was opened"
-                        // Perform actions specific to opened pull request
-                    } else if (prAction == 'reopened') {
-                        echo "Pull request was reopened"
-                        // Perform actions specific to reopened pull request
-                    } else if (prAction == 'closed') {
-                        echo "Pull request was closed"
-                        // Perform actions specific to closed pull request
+                    if (prAction == 'opened' || prAction == 'reopened' || prAction == 'synchronize') {
+                        echo "Handling pull request action: ${prAction}"
                     } else {
-                        echo "Unknown pull request action: $action"
-                        // Handle unknown action accordingly
+                        echo "No specific action needed for pull request action: ${prAction}"
                     }
                 }
             }
